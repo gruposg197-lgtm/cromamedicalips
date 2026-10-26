@@ -1,0 +1,115 @@
+.aliados-section {
+  position: relative;
+  background: rgba(2, 11, 76, 0.86);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 30px 0;
+  overflow: hidden;
+}
+
+.aliados-track-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.aliados-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 68px;
+  padding-right: 68px;
+  animation: aliados-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.aliados-track.is-paused {
+  animation-play-state: paused;
+}
+
+@keyframes aliados-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.aliado-item {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.aliado-item:hover {
+  opacity: 1;
+}
+
+.aliado-item img {
+  height: 100%;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.aliado-fallback {
+  display: none;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.aliados-toggle {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.aliados-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 640px) {
+  .aliados-toggle {
+    right: 14px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .aliado-item {
+    height: 32px;
+  }
+
+  .aliado-fallback {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aliados-track {
+    animation: none;
+  }
+}
