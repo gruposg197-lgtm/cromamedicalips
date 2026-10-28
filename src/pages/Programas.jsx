@@ -3,7 +3,7 @@ import { IconCheck } from '../components/icons'
 
 const QUICK_LIST = [
   'Medicina general',
-  'Telemedicina',
+  'Telexperticia',
   'Medicina internista',
   'Salud ocupacional',
   'Rehabilitación',
@@ -55,7 +55,7 @@ export default function Programas() {
           tag="Prevención y trabajo"
           title="Salud Preventiva y Medicina Ocupacional"
           text="Evaluaciones y exámenes médicos ocupacionales con énfasis en la salud y seguridad del trabajador."
-          image="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=900&q=80"
+          image="https://images.unsplash.com/photo-1666887360680-9dc27a1d2753?auto=format&fit=crop&w=900&q=80"
           alt="Salud Preventiva y Medicina Ocupacional"
           items={[
             'Evaluaciones ocupacionales: ingreso, periódico, egreso y reintegro',
@@ -70,7 +70,7 @@ export default function Programas() {
           tag="Recuperación"
           title="Rehabilitación y Medicina Laboral"
           text="Procesos de rehabilitación y medicina laboral para recuperar la funcionalidad y el bienestar."
-          image="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=900&q=80"
+          image="https://images.unsplash.com/photo-1772122028843-9139d23af4fb?auto=format&fit=crop&w=900&q=80"
           alt="Rehabilitación y Medicina Laboral"
           items={[
             'Evaluaciones médicas laborales especializadas',
@@ -84,12 +84,12 @@ export default function Programas() {
           tag="En casa"
           title="Asistencia y Acompañamiento"
           text="Atención en casa y a distancia para un cuidado continuo, cómodo y cercano."
-          image="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80"
+          image="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?auto=format&fit=crop&w=900&q=80"
           alt="Asistencia y Acompañamiento"
           items={[
             'Servicios de enfermería domiciliaria',
             'Terapia domiciliaria en diversas especialidades',
-            'Telemedicina para consultas y seguimientos remotos',
+            'Telexperticia: telemedicina con enfoque de expertis para consultas y seguimientos remotos',
           ]}
         />
 
@@ -98,7 +98,7 @@ export default function Programas() {
           tag="Especializada"
           title="Medicina y Servicios Especializados"
           text="Atención médica general y especializada para el manejo de afecciones complejas."
-          image="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=900&q=80"
+          image="https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&w=900&q=80"
           alt="Medicina Especializada"
           items={[
             'Medicina general con enfoque en prevención y diagnóstico temprano',
@@ -112,7 +112,7 @@ export default function Programas() {
         <div className="program-detail is-dark">
           <div className="program-detail-image">
             <img
-              src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80"
+              src="https://images.unsplash.com/photo-1579165466949-3180a3d056d5?auto=format&fit=crop&w=900&q=80"
               style={{ opacity: 0.92 }}
               alt="Enfermedades Huérfanas"
             />
@@ -122,7 +122,7 @@ export default function Programas() {
             <h2>Enfermedades Huérfanas</h2>
             <p>
               Sólida experiencia en el tratamiento de enfermedades huérfanas, con atención integral y personalizada
-              mediante un modelo transdisciplinario.
+              mediante un modelo interdisciplinario.
             </p>
             <ul className="check-list">
               <li><IconCheck size={18} />Rutas de diagnóstico especializadas</li>

@@ -1,26 +1,42 @@
 import { useState } from 'react'
 import { IconPhone, IconMail, IconClock, IconMapPin } from '../components/icons'
+import { submitContacto } from '../lib/api'
+
+const LINES = [
+  { label: 'Comercial', phone: '+57 310 589 5425', email: 'comercial@cromamedical.com' },
+  { label: 'Medicina Laboral y Asistencial', phone: '+57 310 284 9173', email: 'asistencial@cromamedical.com' },
+  { label: 'Home Care', phone: '+57 312 301 4584', email: 'homecare@cromamedical.com' },
+]
 
 const PROGRAMS = [
   'Enfermedades huérfanas y de alto costo',
   'Salud ocupacional y medicina laboral',
   'Rehabilitación y terapias',
-  'Asistencia domiciliaria y telemedicina',
+  'Asistencia domiciliaria y telexperticia',
   'Medicina general y especializada',
   'Otro',
 ]
 
 export default function Contacto() {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle')
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    if (!e.target.checkValidity()) {
-      e.target.reportValidity()
+    const form = e.target
+    if (!form.checkValidity()) {
+      form.reportValidity()
       return
     }
-    setSent(true)
-    e.target.reset()
+
+    const payload = Object.fromEntries(new FormData(form).entries())
+    setStatus('sending')
+    try {
+      await submitContacto(payload)
+      setStatus('sent')
+      form.reset()
+    } catch (err) {
+      setStatus('error')
+    }
   }
 
   return (
@@ -34,21 +50,27 @@ export default function Contacto() {
           Solicita atención, agenda una cita o resuelve tus dudas. Nuestro equipo te responderá lo antes posible.
         </p>
 
+        <div className="contact-lines">
+          {LINES.map((line) => (
+            <div className="contact-line" key={line.label}>
+              <div className="contact-line-label">{line.label}</div>
+              {line.phone && (
+                <div className="contact-line-value">
+                  <IconPhone size={15} />
+                  {line.phone}
+                </div>
+              )}
+              {line.email && (
+                <div className="contact-line-value">
+                  <IconMail size={15} />
+                  {line.email}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
         <div className="contact-items">
-          <div className="contact-item">
-            <div className="contact-icon"><IconPhone /></div>
-            <div>
-              <div className="contact-item-label">Línea de atención</div>
-              <div className="contact-item-value">+57 310 589 5425</div>
-            </div>
-          </div>
-          <div className="contact-item">
-            <div className="contact-icon"><IconMail /></div>
-            <div>
-              <div className="contact-item-label">Correo</div>
-              <div className="contact-item-value">comercial@cromamedical.com</div>
-            </div>
-          </div>
           <div className="contact-item">
             <div className="contact-icon"><IconClock /></div>
             <div>
@@ -60,7 +82,7 @@ export default function Contacto() {
             <div className="contact-icon"><IconMapPin /></div>
             <div>
               <div className="contact-item-label">Ubicación</div>
-              <div className="contact-item-value">Carrera 45A # 103-44, Piso 1 · Bogotá</div>
+              <div className="contact-item-value">CL 41 20 39 Park Way · Bogotá</div>
             </div>
           </div>
         </div>
@@ -101,12 +123,18 @@ export default function Contacto() {
               <textarea id="message" name="message" placeholder="Cuéntanos cómo podemos ayudarte" rows={3} required />
             </div>
           </div>
-          <button type="submit" className="form-submit">
-            Enviar solicitud
+          <button type="submit" className="form-submit" disabled={status === 'sending'}>
+            {status === 'sending' ? 'Enviando…' : 'Enviar solicitud'}
           </button>
-          {sent && (
+          {status === 'sent' && (
             <div className="alert-success" style={{ marginTop: 16, fontSize: 13.5, color: '#1e7a4d' }}>
               Solicitud enviada. Nuestro equipo te contactará pronto.
+            </div>
+          )}
+          {status === 'error' && (
+            <div className="alert-success" style={{ marginTop: 16, fontSize: 13.5, color: '#b42318' }}>
+              No pudimos enviar tu solicitud automáticamente. Escríbenos directamente a{' '}
+              <a href="mailto:direccion.medica@cromamedical.com">direccion.medica@cromamedical.com</a>.
             </div>
           )}
         </form>

@@ -23,11 +23,13 @@ export default function Sedes() {
       <section className="container" style={{ padding: '44px 40px 96px', maxWidth: 1120 }}>
         <div className="location-card">
           <div className="location-map">
-            <div className="location-map-dots" />
-            <div className="location-pin">
-              <span />
-            </div>
-            <div className="location-badge">Bogotá</div>
+            <iframe
+              title="Ubicación Croma Medical IPS"
+              src="https://www.google.com/maps?q=CL+41+20-39+Park+Way,+Bogot%C3%A1,+Colombia&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
           <div className="location-info">
             <h3>Sede Principal</h3>
@@ -35,7 +37,7 @@ export default function Sedes() {
               <div className="detail-row">
                 <IconMapPin size={19} />
                 <div>
-                  <strong>Carrera 45A # 103-44, Piso 1</strong>
+                  <strong>CL 41 20 39 Park Way</strong>
                   Bogotá, Colombia
                 </div>
               </div>

@@ -700,7 +700,8 @@
   color: var(--navy);
 }
 
-.program-detail.is-dark .check-list li {
+.program-detail.is-dark .check-list li,
+.mv-card.is-dark .check-list li {
   color: #fff;
 }
 
@@ -709,7 +710,8 @@
   color: var(--accent);
 }
 
-.program-detail.is-dark .check-list svg {
+.program-detail.is-dark .check-list svg,
+.mv-card.is-dark .check-list svg {
   color: var(--sky);
 }
 
@@ -782,48 +784,14 @@
   background: linear-gradient(135deg, #eef2fb, #dfe6f2);
 }
 
-.location-map-dots {
+.location-map iframe {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(2, 11, 76, 0.09) 1px, transparent 1px);
-  background-size: 22px 22px;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
-.location-pin {
-  position: absolute;
-  left: 50%;
-  top: 46%;
-  transform: translate(-50%, -50%);
-  width: 52px;
-  height: 52px;
-  border-radius: 50% 50% 50% 0;
-  background: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 24px rgba(2, 11, 76, 0.3);
-  rotate: -45deg;
-}
-
-.location-pin span {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--sky);
-  rotate: 45deg;
-}
-
-.location-badge {
-  position: absolute;
-  left: 24px;
-  bottom: 22px;
-  background: var(--navy);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 7px 14px;
-  border-radius: 20px;
-}
 
 .location-info {
   padding: 48px 44px;
@@ -921,7 +889,48 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  margin-top: 40px;
+  margin-top: 24px;
+}
+
+.contact-lines {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.contact-line {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.contact-line-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.contact-line-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.contact-line-value svg {
+  flex: none;
+  color: var(--accent);
+}
+
+@media (max-width: 500px) {
+  .contact-lines {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contact-form-card {

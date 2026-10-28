@@ -8,6 +8,8 @@ const LINKS = [
   { label: 'Nosotros', to: '/nosotros' },
   { label: 'Programas', to: '/programas' },
   { label: 'Sedes', to: '/sedes' },
+  { label: 'Seguridad del paciente', to: '/seguridad-del-paciente' },
+  { label: 'PQRSF', to: '/pqrsf' },
   { label: 'Contacto', to: '/contacto' },
 ]
 

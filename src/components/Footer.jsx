@@ -30,6 +30,8 @@ export default function Footer() {
             <li><Link to="/nosotros">Nosotros</Link></li>
             <li><Link to="/sedes">Sedes</Link></li>
             <li><Link to="/portal">Portal de pacientes</Link></li>
+            <li><Link to="/seguridad-del-paciente">Seguridad del paciente</Link></li>
+            <li><Link to="/pqrsf">PQRSF</Link></li>
           </ul>
         </div>
 
@@ -38,7 +40,7 @@ export default function Footer() {
           <ul className="footer-links footer-contact">
             <li>+57 310 589 5425</li>
             <li>comercial@cromamedical.com</li>
-            <li>Cra 45A # 103-44, Piso 1 · Bogotá</li>
+            <li>CL 41 20 39 Park Way · Bogotá</li>
             <li><Link to="/contacto" className="footer-cta">Agendar atención →</Link></li>
           </ul>
         </div>

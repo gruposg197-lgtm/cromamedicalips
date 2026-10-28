@@ -1,8 +1,6 @@
 .aliados-section {
   position: relative;
-  background: rgba(2, 11, 76, 0.86);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: var(--navy);
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -22,12 +20,8 @@
   width: max-content;
   gap: 68px;
   padding-right: 68px;
-  animation: aliados-scroll 20s linear infinite;
+  animation: aliados-scroll 55s linear infinite;
   will-change: transform;
-}
-
-.aliados-track.is-paused {
-  animation-play-state: paused;
 }
 
 @keyframes aliados-scroll {
@@ -69,36 +63,7 @@
   white-space: nowrap;
 }
 
-.aliados-toggle {
-  position: absolute;
-  top: 50%;
-  right: 24px;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(6px);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.aliados-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
 @media (max-width: 640px) {
-  .aliados-toggle {
-    right: 14px;
-    width: 26px;
-    height: 26px;
-  }
-
   .aliado-item {
     height: 32px;
   }
@@ -110,6 +75,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .aliados-track {
-    animation: none;
+    animation-duration: 100s;
   }
 }

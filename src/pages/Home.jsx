@@ -120,7 +120,7 @@ export default function Home() {
             <article className="program-card">
               <div className="program-card-image">
                 <img
-                  src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=700&q=80"
+                  src="https://images.unsplash.com/photo-1579165466949-3180a3d056d5?auto=format&fit=crop&w=700&q=80"
                   alt="Enfermedades Huérfanas"
                 />
               </div>
@@ -134,7 +134,7 @@ export default function Home() {
             <article className="program-card">
               <div className="program-card-image">
                 <img
-                  src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&q=80"
+                  src="https://images.unsplash.com/photo-1666887360680-9dc27a1d2753?auto=format&fit=crop&w=700&q=80"
                   alt="Salud Ocupacional"
                 />
               </div>
@@ -148,7 +148,7 @@ export default function Home() {
             <article className="program-card is-dark">
               <div className="program-card-image">
                 <img
-                  src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=80"
+                  src="https://images.unsplash.com/photo-1772122028843-9139d23af4fb?auto=format&fit=crop&w=700&q=80"
                   style={{ opacity: 0.9 }}
                   alt="Rehabilitación y Acompañamiento"
                 />
@@ -156,7 +156,7 @@ export default function Home() {
               <div className="program-card-body">
                 <div className="tag">Cuidado continuo</div>
                 <h3>Rehabilitación y Acompañamiento</h3>
-                <p>Fisioterapia, terapias, enfermería domiciliaria y telemedicina.</p>
+                <p>Fisioterapia, terapias, enfermería domiciliaria y telexperticia (telemedicina con enfoque de expertis).</p>
               </div>
             </article>
           </div>

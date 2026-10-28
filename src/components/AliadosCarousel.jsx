@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { IconPause, IconPlay } from './icons'
 import './AliadosCarousel.css'
 
 const ALIADOS = [
@@ -13,14 +11,17 @@ const ALIADOS = [
   { name: 'Empucol', file: 'empucol.png' },
 ]
 
-export default function AliadosCarousel() {
-  const [paused, setPaused] = useState(false)
+// Un "set" se repite varias veces para que el ancho total supere el de
+// cualquier pantalla (incluso ultrawide) y la animación nunca muestre
+// espacios en blanco antes de reiniciar el ciclo.
+const SET = Array(3).fill(ALIADOS).flat()
 
+export default function AliadosCarousel() {
   return (
     <section className="aliados-section" aria-label="Nuestros aliados">
       <div className="aliados-track-wrap">
-        <div className={`aliados-track ${paused ? 'is-paused' : ''}`}>
-          {[...ALIADOS, ...ALIADOS].map((aliado, i) => (
+        <div className="aliados-track">
+          {[...SET, ...SET].map((aliado, i) => (
             <span className="aliado-item" key={`${aliado.file}-${i}`}>
               <img
                 src={`/aliados/${aliado.file}`}
@@ -36,14 +37,6 @@ export default function AliadosCarousel() {
           ))}
         </div>
       </div>
-      <button
-        type="button"
-        className="aliados-toggle"
-        onClick={() => setPaused((v) => !v)}
-        aria-label={paused ? 'Reanudar animación' : 'Pausar animación'}
-      >
-        {paused ? <IconPlay size={14} /> : <IconPause size={14} />}
-      </button>
     </section>
   )
 }
