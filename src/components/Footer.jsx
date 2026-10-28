@@ -9,8 +9,8 @@ export default function Footer() {
         <div>
           <Logo dark />
           <p className="footer-about">
-            IPS especializada en enfermedades huérfanas y de alto costo. Prestación integral de servicios de salud,
-            humana y confiable.
+            Grupo de salud integral especializado en enfermedades huérfanas y de alto costo, con programas de salud
+            ocupacional, SST, rehabilitación y home care para personas y empresas.
           </p>
         </div>
 
@@ -18,9 +18,10 @@ export default function Footer() {
           <div className="footer-heading">Programas</div>
           <ul className="footer-links">
             <li><Link to="/programas">Enfermedades huérfanas y de alto costo</Link></li>
-            <li><Link to="/programas">Salud ocupacional</Link></li>
+            <li><Link to="/programas">Salud ocupacional y SST</Link></li>
             <li><Link to="/programas">Rehabilitación y medicina laboral</Link></li>
             <li><Link to="/programas">Asistencia y acompañamiento</Link></li>
+            <li><Link to="/programas">Medicina y servicios especializados</Link></li>
           </ul>
         </div>
 

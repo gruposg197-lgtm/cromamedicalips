@@ -17,6 +17,8 @@
 
 .navbar-brand {
   display: flex;
+  flex-shrink: 0;
+  margin-right: 36px;
 }
 
 .navbar-toggle {

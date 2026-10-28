@@ -134,6 +134,58 @@ function map_file_item($item) {
     ];
 }
 
+// Extracción ligera de texto de PDF (sin librerías externas): descomprime los streams
+// FlateDecode y recupera los fragmentos entre paréntesis de los operadores Tj/TJ.
+function extract_text_from_pdf($bytes) {
+    $text = '';
+    if (preg_match_all('/stream\r?\n(.*?)endstream/s', $bytes, $matches)) {
+        foreach ($matches[1] as $stream) {
+            $decoded = @gzuncompress(rtrim($stream, "\r\n"));
+            if ($decoded === false) continue;
+            if (preg_match_all('/\((?:[^()\\\\]|\\\\.)*\)/', $decoded, $parts)) {
+                foreach ($parts[0] as $part) {
+                    $clean = substr($part, 1, -1);
+                    $clean = str_replace(['\\(', '\\)', '\\\\'], ['(', ')', '\\'], $clean);
+                    $text .= $clean . ' ';
+                }
+            }
+        }
+    }
+    return $text;
+}
+
+// Los documentos clínicos de Croma Medical terminan con una línea de firma electrónica,
+// p.ej.: "Firmado Electrónicamente: MD RODRIGO ALEJANDRO MÉNDEZ GUZMÁN, CC 1032395042".
+function extract_professional_name($bytes) {
+    $text = extract_text_from_pdf($bytes);
+    if (preg_match('/Firmado\s+Electr[oó]nicamente:\s*(?:MD\s+)?([A-ZÁÉÍÓÚÑ.\s]{4,80}?)\s*,\s*CC/iu', $text, $m)) {
+        return trim(preg_replace('/\s+/', ' ', $m[1]));
+    }
+    return null;
+}
+
+function fetch_professional_from_pdf($downloadUrl) {
+    $ch = curl_init($downloadUrl);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
+    $bytes = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    if ($status >= 300 || !$bytes) return null;
+    try {
+        return extract_professional_name($bytes);
+    } catch (Exception $e) {
+        return null;
+    }
+}
+
+// Excluye documentos administrativos (autorizaciones y hojas de asistencia) según la
+// nomenclatura del instructivo de facturación: solo deben quedar los conceptos médicos
+// (historias clínicas, evoluciones, actas, etc.).
+function is_administrative_document($name) {
+    $upper = strtoupper(trim($name));
+    return strpos($upper, 'AUT') === 0 || strpos($upper, 'AS-') === 0;
+}
+
 function is_patient_folder($item, $cedula) {
     if (!isset($item['folder'])) return false;
     $name = strtoupper(trim($item['name']));
@@ -170,11 +222,11 @@ function list_graph_documents($cedula, $limit) {
         $children = get_children($token, $driveId, $folder['id']);
         foreach ($children as $child) {
             if (isset($child['file'])) {
-                $files[] = $child;
+                if (!is_administrative_document($child['name'])) $files[] = $child;
             } elseif (isset($child['folder'])) {
                 $grandchildren = get_children($token, $driveId, $child['id']);
                 foreach ($grandchildren as $gc) {
-                    if (isset($gc['file'])) $files[] = $gc;
+                    if (isset($gc['file']) && !is_administrative_document($gc['name'])) $files[] = $gc;
                 }
             }
         }
@@ -192,7 +244,16 @@ function list_graph_documents($cedula, $limit) {
         return strcmp($b['lastModifiedDateTime'], $a['lastModifiedDateTime']);
     });
 
-    return array_map('map_file_item', array_slice($unique, 0, $limit));
+    $limited = array_slice($unique, 0, $limit);
+    $mapped = [];
+    foreach ($limited as $item) {
+        $doc = map_file_item($item);
+        if (preg_match('/\.pdf$/i', $item['name']) && $doc['downloadUrl']) {
+            $doc['medico'] = fetch_professional_from_pdf($doc['downloadUrl']);
+        }
+        $mapped[] = $doc;
+    }
+    return $mapped;
 }
 
 function get_mock_preview($cedula, $documentId) {

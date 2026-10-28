@@ -15,13 +15,16 @@ export default function Logo({ dark = false, size = 32 }) {
   const mark = dark ? '#ffffff' : '#020b4c'
   const title = dark ? '#ffffff' : '#020b4c'
   const subtitle = dark ? '#a0dcff' : '#1d289c'
+  const titleSize = Math.round(size * 0.53)
+  const subtitleSize = Math.round(size * 0.25)
+  const subtitleGap = Math.round(size * 0.09)
 
   return (
-    <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+    <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: Math.round(size * 0.34) }}>
       <LogoMark color={mark} size={size} />
-      <div style={{ lineHeight: 1 }}>
-        <div style={{ fontWeight: 700, fontSize: 17, letterSpacing: '0.02em', color: title }}>CROMA MEDICAL</div>
-        <div style={{ fontWeight: 500, fontSize: 8, letterSpacing: '0.4em', color: subtitle, marginTop: 3 }}>
+      <div style={{ lineHeight: 1, whiteSpace: 'nowrap', textAlign: 'center' }}>
+        <div style={{ fontWeight: 700, fontSize: titleSize, letterSpacing: '0.02em', color: title }}>CROMA MEDICAL</div>
+        <div style={{ fontWeight: 500, fontSize: subtitleSize, letterSpacing: '0.4em', color: subtitle, marginTop: subtitleGap }}>
           SALUD INTEGRAL
         </div>
       </div>

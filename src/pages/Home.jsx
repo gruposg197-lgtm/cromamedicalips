@@ -9,7 +9,7 @@ export default function Home() {
       {/* HERO */}
       <section className="container hero">
         <div>
-          <span className="badge-pill">IPS · Enfermedades huérfanas y de alto costo</span>
+          <span className="badge-pill">Salud integral · Enfermedades huérfanas y bienestar laboral</span>
           <h1 className="hero-copy-h1">
             Cuidamos lo que más importa,
             <br />
@@ -94,13 +94,13 @@ export default function Home() {
         </div>
         <div>
           <span className="eyebrow">Quiénes somos</span>
-          <h2 style={{ fontSize: 40, lineHeight: 1.12, marginTop: 16 }}>Prestación integral de servicios de salud</h2>
+          <h2 style={{ fontSize: 40, lineHeight: 1.12, marginTop: 16 }}>Más que una IPS: un grupo de salud integral</h2>
           <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--text-muted)', marginTop: 22 }}>
-            En Croma Medical IPS nos dedicamos a la prestación integral de servicios de salud en diversas
-            especialidades médicas, con un equipo multidisciplinario altamente calificado. Nos especializamos en
-            enfermedades huérfanas y de alto costo, y ofrecemos además salud ocupacional y medicina laboral,
-            rehabilitación, asistencia domiciliaria, telexperticia, y medicina general e interna — desde la
-            prevención hasta la rehabilitación, la asistencia y el acompañamiento.
+            Croma Medical es un grupo de salud integral que va más allá de la consulta médica: combinamos nuestra IPS
+            especializada en enfermedades huérfanas y de alto costo con programas de salud ocupacional y medicina
+            laboral, seguridad y salud en el trabajo (SST), rehabilitación, home care, servicio farmacéutico y
+            medicina general y especializada — acompañando a personas y empresas desde la prevención hasta el
+            cuidado continuo.
           </p>
           <div className="feature-grid">
             <Feature title="Modelo integral" sub="clínico, terapéutico y humano" />

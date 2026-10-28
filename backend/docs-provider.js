@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { PDFParse } from 'pdf-parse'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const MOCK_ROOT = path.join(__dirname, 'mock-sgd')
@@ -109,6 +110,37 @@ function mapFile(item) {
   }
 }
 
+// Los documentos clínicos de Croma Medical terminan con una línea de firma electrónica,
+// p.ej.: "Firmado Electrónicamente: MD RODRIGO ALEJANDRO MÉNDEZ GUZMÁN, CC 1032395042".
+// Se extrae el nombre del profesional a partir de ese patrón.
+function extractProfessionalName(text) {
+  const match = text.match(/Firmado\s+Electr[oó]nicamente:\s*(?:MD\s+)?([A-ZÁÉÍÓÚÑ.\s]{4,80}?)\s*,\s*CC/i)
+  if (!match) return null
+  return match[1].replace(/\s+/g, ' ').trim()
+}
+
+async function fetchProfessionalFromPdf(downloadUrl) {
+  try {
+    const res = await fetch(downloadUrl)
+    if (!res.ok) return null
+    const buffer = Buffer.from(await res.arrayBuffer())
+    const parser = new PDFParse({ data: buffer })
+    const { text } = await parser.getText()
+    return extractProfessionalName(text || '')
+  } catch (err) {
+    console.error('No se pudo extraer el profesional del PDF:', err.message)
+    return null
+  }
+}
+
+// Excluye documentos administrativos (autorizaciones y hojas de asistencia) según la
+// nomenclatura del instructivo de facturación: solo deben quedar los conceptos médicos
+// (historias clínicas, evoluciones, actas, etc.).
+function isAdministrativeDocument(name) {
+  const upper = name.toUpperCase().trim()
+  return upper.startsWith('AUT') || upper.startsWith('AS-')
+}
+
 function isPatientFolder(item, cedula) {
   if (!item.folder) return false
   const name = item.name.toUpperCase().trim()
@@ -146,10 +178,10 @@ async function listGraph(cedula, limit) {
     const children = await getChildren(token, driveId, folder.id)
     for (const child of children) {
       if (child.file) {
-        files.push(child)
+        if (!isAdministrativeDocument(child.name)) files.push(child)
       } else if (child.folder) {
         const grandchildren = await getChildren(token, driveId, child.id)
-        files.push(...grandchildren.filter((gc) => gc.file))
+        files.push(...grandchildren.filter((gc) => gc.file && !isAdministrativeDocument(gc.name)))
       }
     }
   }
@@ -162,7 +194,17 @@ async function listGraph(cedula, limit) {
   })
 
   unique.sort((a, b) => new Date(b.lastModifiedDateTime) - new Date(a.lastModifiedDateTime))
-  return unique.slice(0, limit).map(mapFile)
+  const limited = unique.slice(0, limit)
+
+  return Promise.all(
+    limited.map(async (item) => {
+      const mapped = mapFile(item)
+      if (/\.pdf$/i.test(item.name) && mapped.downloadUrl) {
+        mapped.medico = await fetchProfessionalFromPdf(mapped.downloadUrl)
+      }
+      return mapped
+    })
+  )
 }
 
 export async function listLatestDocuments(cedula, limit = 5) {

@@ -21,7 +21,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="container navbar-inner">
         <NavLink to="/" className="navbar-brand" onClick={() => setOpen(false)}>
-          <Logo />
+          <Logo size={38} />
         </NavLink>
 
         <button

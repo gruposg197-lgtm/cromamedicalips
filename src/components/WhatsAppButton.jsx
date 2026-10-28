@@ -1,7 +1,7 @@
 import './WhatsAppButton.css'
 
 const PHONE = '573102849173'
-const MESSAGE = 'Hola, quiero información sobre Croma Medical IPS.'
+const MESSAGE = 'Hola, quiero información sobre Croma Medical.'
 
 export default function WhatsAppButton() {
   return (

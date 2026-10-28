@@ -44,9 +44,9 @@ export default function Nosotros() {
         <span className="eyebrow">Nosotros</span>
         <h1>Salud que conecta ciencia y humanidad</h1>
         <p>
-          Croma Medical IPS presta servicios integrales de salud en diversas especialidades, con un equipo
-          multidisciplinario y un enfoque humanizado, innovador y de alta calidad, especializado en enfermedades
-          huérfanas y de alto costo.
+          Croma Medical es un grupo de salud integral: una IPS especializada en enfermedades huérfanas y de alto
+          costo, junto con programas de salud ocupacional, SST, rehabilitación, home care y bienestar laboral para
+          personas y empresas, con un equipo multidisciplinario y un enfoque humanizado, innovador y de alta calidad.
         </p>
       </section>
 

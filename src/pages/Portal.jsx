@@ -169,10 +169,79 @@ function Login({ onLogin }) {
   )
 }
 
-function deriveServiceLabel(rawName, patientName) {
-  let label = rawName.replace(/\.[^./]+$/, '')
-  label = label.replace(/\b\d{1,2}-\d{1,2}-\d{4}\b/g, ' ')
+// Nomenclatura oficial de documentos según INS-FIN-011-V01 "Instructivo de carpetas para facturar".
+// Códigos compuestos documentados (sin guion): HC + disciplina, EV + disciplina, CCC.
+const COMPOUND_SERVICE_LABELS = {
+  HCPS: 'Historia clínica de psicología',
+  HCFS: 'Historia clínica de fisiatría',
+  HCML: 'Historia clínica de medicina laboral',
+  // HCOT no está en el instructivo oficial; se infiere del mismo patrón HC + disciplina.
+  HCOT: 'Historia clínica de ortopedia',
+  EVTF: 'Evolución de terapia física',
+  EVTO: 'Evolución de terapia ocupacional',
+  CCC: 'Certificado de cierre de caso',
+}
 
+// Nombres de disciplina/servicio (campo "SERVICIO" del instructivo).
+// OT (Ortopedia) no está documentado oficialmente; se infiere de los archivos reales.
+const SERVICE_NOUNS = {
+  PS: 'Psicología',
+  FS: 'Fisiatría',
+  ML: 'Medicina laboral',
+  TF: 'Terapia física',
+  TO: 'Terapia ocupacional',
+  VDO: 'Evaluación de desempeño ocupacional',
+  CR: 'Carta de recomendaciones',
+  JM: 'Junta médica',
+  RX: 'Imágenes diagnósticas',
+  EX: 'Exámenes',
+  OT: 'Ortopedia',
+}
+
+const AS_SERVICE_PHRASES = {
+  PS: 'Asistencia a psicología',
+  FS: 'Asistencia a fisiatría',
+  ML: 'Asistencia a medicina laboral',
+  TF: 'Asistencia a terapia física',
+  TO: 'Asistencia a terapia ocupacional',
+  VDO: 'Asistencia a evaluación de desempeño ocupacional',
+  CR: 'Asistencia a entrega de carta de recomendaciones',
+  OT: 'Asistencia a ortopedia',
+}
+
+function deriveServiceLabel(rawName, patientName) {
+  const noExt = rawName.replace(/\.[^./]+$/, '')
+  const upper = noExt.toUpperCase()
+
+  const compoundCode = Object.keys(COMPOUND_SERVICE_LABELS).find((code) => upper.startsWith(code))
+  if (compoundCode) return COMPOUND_SERVICE_LABELS[compoundCode]
+
+  const tokens = upper.split(/[^A-Z0-9]+/).filter(Boolean)
+  const prefix = tokens[0]
+
+  if (prefix === 'VDO') return 'Evaluación de desempeño ocupacional'
+  if (prefix === 'CR') return 'Carta de recomendaciones'
+  if (prefix === 'ACJ') return 'Acta de junta médica'
+  if (prefix === 'COT') return 'Cotización'
+  if (prefix === 'FAC') return 'Factura'
+
+  if (prefix === 'AS') {
+    const serviceToken = tokens.slice(1).find((t) => AS_SERVICE_PHRASES[t])
+    return serviceToken ? AS_SERVICE_PHRASES[serviceToken] : 'Asistencia'
+  }
+
+  if (prefix === 'AUT') {
+    const serviceToken = tokens.slice(1).find((t) => SERVICE_NOUNS[t])
+    return serviceToken ? `Autorización — ${SERVICE_NOUNS[serviceToken]}` : 'Autorización del asegurador'
+  }
+
+  if (prefix === 'HC') return 'Historia clínica'
+  if (prefix === 'EV') return 'Evolución'
+
+  // Documentos ya nombrados de forma literal (no siguen el código abreviado): se limpia
+  // la fecha, el nombre del paciente y la cédula, dejando el resto del nombre tal cual.
+  let label = noExt
+  label = label.replace(/\b\d{1,2}-\d{1,2}-\d{4}\b/g, ' ')
   if (patientName) {
     const words = patientName.split(/\s+/).filter((w) => w.length > 2)
     for (const w of words) {
@@ -180,10 +249,9 @@ function deriveServiceLabel(rawName, patientName) {
       label = label.replace(new RegExp(`\\b${escaped}\\b`, 'ig'), ' ')
     }
   }
-
   label = label.replace(/\b\d{6,}\b/g, ' ')
   label = label.replace(/[-_]+/g, ' ').replace(/\s{2,}/g, ' ').trim()
-  return label || rawName.replace(/\.[^./]+$/, '')
+  return label || noExt
 }
 
 function DocumentList({ documents, error, emptyText, onPreview, patientName }) {
