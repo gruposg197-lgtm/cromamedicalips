@@ -291,9 +291,15 @@
 /* ===================== PROGRAMAS (home preview cards) ===================== */
 .programs-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 26px;
   margin-top: 56px;
+}
+
+@media (max-width: 1140px) {
+  .programs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .program-card {
@@ -1470,5 +1476,228 @@
 @media (max-width: 860px) {
   .panels-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.docs-table-wrap {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.docs-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.docs-table thead th {
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0 12px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.docs-table tbody td {
+  padding: 14px 12px;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.docs-table-name {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.docs-table-date,
+.docs-table-doctor {
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.docs-table-file {
+  color: var(--text-faint);
+  font-size: 12.5px;
+}
+
+.docs-table-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .docs-table {
+    min-width: 0;
+  }
+
+  .docs-table thead {
+    display: none;
+  }
+
+  .docs-table,
+  .docs-table tbody,
+  .docs-table tr,
+  .docs-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .docs-table tr {
+    border-top: 1px solid var(--border);
+    padding: 12px 0;
+  }
+
+  .docs-table tbody td {
+    border: none;
+    padding: 3px 0;
+  }
+
+  .docs-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .docs-table-actions {
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 6px;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 11, 76, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+}
+
+.modal-dialog {
+  background: #fff;
+  border-radius: 18px;
+  width: min(480px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.modal-dialog-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-dialog-head h3 {
+  font-size: 18px;
+}
+
+.modal-dialog-head button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-faint);
+}
+
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 11, 76, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+}
+
+.preview-dialog {
+  background: #fff;
+  border-radius: 18px;
+  width: min(900px, 100%);
+  height: min(80vh, 900px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.preview-dialog-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.preview-dialog-head span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-dialog-head button {
+  flex: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-faint);
+}
+
+.preview-dialog-body {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.preview-dialog-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.preview-loading,
+.preview-error {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 14px;
+}
+
+.preview-error {
+  color: #b42318;
+}
+
+.preview-text {
+  padding: 24px;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--navy);
+}
+
+@media (max-width: 640px) {
+  .preview-dialog {
+    height: 90vh;
   }
 }

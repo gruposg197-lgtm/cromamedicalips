@@ -16,8 +16,9 @@ export default function Home() {
             de forma <span className="accent">integral</span>.
           </h1>
           <p>
-            Prestación integral de servicios de salud con un equipo multidisciplinario, especializado en enfermedades
-            huérfanas y de alto costo, desde la prevención hasta la rehabilitación y el acompañamiento.
+            Prestación integral de servicios de salud con un equipo multidisciplinario: enfermedades huérfanas y de
+            alto costo, salud ocupacional y medicina laboral, rehabilitación, asistencia domiciliaria y telexperticia,
+            y medicina general y especializada — desde la prevención hasta el acompañamiento continuo.
           </p>
           <div className="hero-actions">
             <Link to="/contacto" className="btn btn-navy">
@@ -75,6 +76,10 @@ export default function Home() {
           <span>Salud ocupacional</span>
           <span className="dot">•</span>
           <span>Rehabilitación y medicina laboral</span>
+          <span className="dot">•</span>
+          <span>Asistencia y acompañamiento</span>
+          <span className="dot">•</span>
+          <span>Medicina y servicios especializados</span>
           <span className="habilitado">Habilitados ante la Secretaría de Salud</span>
         </div>
       </div>
@@ -93,8 +98,9 @@ export default function Home() {
           <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--text-muted)', marginTop: 22 }}>
             En Croma Medical IPS nos dedicamos a la prestación integral de servicios de salud en diversas
             especialidades médicas, con un equipo multidisciplinario altamente calificado. Nos especializamos en
-            enfermedades huérfanas y de alto costo, ofreciendo servicios desde la prevención hasta la rehabilitación,
-            la asistencia y el acompañamiento.
+            enfermedades huérfanas y de alto costo, y ofrecemos además salud ocupacional y medicina laboral,
+            rehabilitación, asistencia domiciliaria, telexperticia, y medicina general e interna — desde la
+            prevención hasta la rehabilitación, la asistencia y el acompañamiento.
           </p>
           <div className="feature-grid">
             <Feature title="Modelo integral" sub="clínico, terapéutico y humano" />
@@ -157,6 +163,20 @@ export default function Home() {
                 <div className="tag">Cuidado continuo</div>
                 <h3>Rehabilitación y Acompañamiento</h3>
                 <p>Fisioterapia, terapias, enfermería domiciliaria y telexperticia (telemedicina con enfoque de expertis).</p>
+              </div>
+            </article>
+
+            <article className="program-card">
+              <div className="program-card-image">
+                <img
+                  src="https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&w=700&q=80"
+                  alt="Medicina y Servicios Especializados"
+                />
+              </div>
+              <div className="program-card-body">
+                <div className="tag">Especializada</div>
+                <h3>Medicina y Servicios Especializados</h3>
+                <p>Medicina general, medicina interna y dispositivos médicos para el manejo de afecciones complejas.</p>
               </div>
             </article>
           </div>

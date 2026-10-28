@@ -15,6 +15,11 @@ dist-ssr
 # Design reference material (not part of the app source)
 design-reference/
 
+# Secretos y datos locales del backend de prueba / portal
+backend/data.sqlite
+backend/.env
+backend-php/portal/config.php
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

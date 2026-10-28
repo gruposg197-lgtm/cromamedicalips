@@ -6,11 +6,18 @@ const QUICK_LIST = [
   'Telexperticia',
   'Medicina internista',
   'Salud ocupacional',
+  'Seguridad y Salud en el Trabajo (SST)',
   'Rehabilitación',
   'Medicina especializada',
+  'Salud mental',
   'Exámenes de laboratorio',
   'Enfermería',
+  'Home Care especializado',
   'Promoción y Prevención',
+  'Nutrición y dietética',
+  'Vacunación',
+  'Servicio farmacéutico',
+  'Vitales No Disponibles (VND)',
   'Enfermedades huérfanas',
 ]
 
@@ -60,8 +67,12 @@ export default function Programas() {
           items={[
             'Evaluaciones ocupacionales: ingreso, periódico, egreso y reintegro',
             'Exámenes en alturas, espacios confinados y manipulación de alimentos',
-            'Audiometría, optometría y espirometría',
+            'Audiometría, optometría, espirometría y electrocardiografía',
+            'Bioanalítica básica y especializada',
             'Psicología ocupacional y baterías psicológicas',
+            'Psicosensométricos, test de fobias y test para espacios confinados',
+            'Diseño, interventoría y auditoría de Sistemas de Gestión de Seguridad y Salud en el Trabajo (SG-SST)',
+            'Asesoría ambiental, mediciones y saneamiento ambiental',
           ]}
         />
 
@@ -83,11 +94,11 @@ export default function Programas() {
         <ProgramDetail
           tag="En casa"
           title="Asistencia y Acompañamiento"
-          text="Atención en casa y a distancia para un cuidado continuo, cómodo y cercano."
+          text="Home Care especializado: atención en casa y a distancia para un cuidado continuo, cómodo y cercano."
           image="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?auto=format&fit=crop&w=900&q=80"
           alt="Asistencia y Acompañamiento"
           items={[
-            'Servicios de enfermería domiciliaria',
+            'Home Care especializado: enfermería domiciliaria con seguimiento clínico',
             'Terapia domiciliaria en diversas especialidades',
             'Telexperticia: telemedicina con enfoque de expertis para consultas y seguimientos remotos',
           ]}
@@ -103,7 +114,12 @@ export default function Programas() {
           items={[
             'Medicina general con enfoque en prevención y diagnóstico temprano',
             'Medicina interna para afecciones complejas',
+            'Salud mental',
             'Atención en enfermedades huérfanas y de alto costo',
+            'Nutrición y dietética',
+            'Vacunación',
+            'Servicio farmacéutico y dispensación de medicamentos',
+            'Gestión e importación de medicamentos Vitales No Disponibles (VND)',
             'Dispositivos médicos',
           ]}
         />
@@ -125,10 +141,13 @@ export default function Programas() {
               mediante un modelo interdisciplinario.
             </p>
             <ul className="check-list">
-              <li><IconCheck size={18} />Rutas de diagnóstico especializadas</li>
-              <li><IconCheck size={18} />Equipo multidisciplinario dedicado</li>
-              <li><IconCheck size={18} />Gestión y acompañamiento de medicamentos</li>
-              <li><IconCheck size={18} />Conexión con redes de referencia</li>
+              <li><IconCheck size={18} />Abordaje integral considerando variables individuales y fenotipos</li>
+              <li><IconCheck size={18} />Diagnósticos precisos y personalizados</li>
+              <li><IconCheck size={18} />Cuidado paliativo y soporte terapéutico continuo</li>
+              <li><IconCheck size={18} />Empoderamiento y autocuidado para pacientes y familias</li>
+              <li><IconCheck size={18} />Integración de redes y coordinación con el sistema de salud</li>
+              <li><IconCheck size={18} />Farmacovigilancia y manejo integral de medicamentos</li>
+              <li><IconCheck size={18} />Gestión e importación de medicamentos Vitales No Disponibles (VND)</li>
             </ul>
             <div className="tag-cloud">
               <div className="tag-cloud-label">Algunas patologías tratadas</div>
@@ -138,7 +157,8 @@ export default function Programas() {
                 ))}
               </div>
               <div className="tag-cloud-note">
-                Más de 6.000 enfermedades huérfanas en el mundo · 2.198 reconocidas en Colombia (Res. 5265 de 2018).
+                Más de 6.000 enfermedades huérfanas en el mundo, el 80% de origen genético · 2.198 reconocidas en
+                Colombia (Res. 5265 de 2018).
               </div>
             </div>
           </div>

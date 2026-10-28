@@ -103,6 +103,34 @@ export function IconDownload({ size, color = 'currentColor', strokeWidth = 2 }) 
   )
 }
 
+export function IconEye({ size, color = 'currentColor', strokeWidth = 2 }) {
+  return (
+    <Svg size={size} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </Svg>
+  )
+}
+
+export function IconEdit({ size, color = 'currentColor', strokeWidth = 2 }) {
+  return (
+    <Svg size={size} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </Svg>
+  )
+}
+
+export function IconKey({ size, color = 'currentColor', strokeWidth = 2 }) {
+  return (
+    <Svg size={size} stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="7.5" cy="15.5" r="5.5" />
+      <path d="M21 2l-9.6 9.6" />
+      <path d="M15.5 7.5l3 3L22 7l-3-3" />
+    </Svg>
+  )
+}
+
 export function IconPause({ size, color = 'currentColor' }) {
   return (
     <Svg size={size}>

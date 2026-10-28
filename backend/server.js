@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import nodemailer from 'nodemailer'
+import { registerPortalRoutes } from './portal-routes.js'
 
 const PORT = process.env.PORT || 4310
 
@@ -73,6 +74,8 @@ function handleForm(formKey) {
 app.post('/api/contacto', handleForm('contacto'))
 app.post('/api/pqrsf', handleForm('pqrsf'))
 app.get('/api/health', (req, res) => res.json({ ok: true }))
+
+registerPortalRoutes(app)
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Backend de prueba escuchando en http://localhost:${PORT}`)
